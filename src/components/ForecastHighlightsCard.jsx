@@ -2,7 +2,7 @@ import React from "react";
 import farenheitToCelsius from "../assets/functions/FarenheitToCelsius";
 import { useCookies } from "react-cookie";
 
-export default function ForecastHighlightsCard({date, icon, tempMin, tempMax}) {
+export default function ForecastHighlightsCard({date, icon, tempMin, tempMax, period, temp}) {
     const [cookie] = useCookies(['temperatureFormat']);
 
     const getDayOfWeek = (dateString) => {
@@ -13,10 +13,16 @@ export default function ForecastHighlightsCard({date, icon, tempMin, tempMax}) {
 
     return (
         <div className="forecast-highligts-card">
-            <p> {getDayOfWeek(date)} </p>
+            {period == 'week' && <p> {getDayOfWeek(date)} </p>}
             <img src={`${icon}.png`} alt="" />
-            {cookie.temperatureFormat === 'celsius' && <span> <strong> {farenheitToCelsius(tempMax)}°C </strong> / {farenheitToCelsius(tempMin)}°C </span>} 
-            {cookie.temperatureFormat !== 'celsius' && <span> <strong> {tempMax}°F </strong> / {tempMin}°F </span>} 
+            {temp && cookie.temperatureFormat === 'celsius' && <span> <strong> {farenheitToCelsius(tempMax)}°C </strong> / {farenheitToCelsius(tempMin)}°C </span>} 
+            {temp && cookie.temperatureFormat !== 'celsius' && <span> <strong> {tempMax}°F </strong> / {tempMin}°F </span>} 
+            {!temp && <span> <string> {temp} </string></span>}
         </div>
     )
+}
+
+ForecastHighlightsCard.defaultProps = {
+    period: "week",
+    temp: null
 }

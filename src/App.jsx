@@ -5,10 +5,12 @@ import WeatherHighligts from "./layouts/WeatherHighligts";
 import { useEffect } from "react";
 
 export default function App() {
-  const [cookies, setCookies, removeCookies] = useCookies(['temperatureFormat']);
+  const [cookies, setCookies, removeCookies] = useCookies(['temperatureFormat', 'currentPeriod']);
 
   useEffect(() => {
     setCookies('temperatureFormat', 'celsius', { path: '/', maxAge: 3600 });
+    setCookies('currentPeriod', 'week', { path: '/', maxAge: 3600 });
+
   }, [])
 
   return (

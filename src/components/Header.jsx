@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { useCookies } from "react-cookie";
 
 export default function Header() {
@@ -8,9 +8,10 @@ export default function Header() {
     const celsiusRef = useRef(0);
     const farenheitRef = useRef(0);
 
-    const [cookies, setCookies, removeCookies] = useCookies(['temperatureFormat']);
+    const [temperatureCookie, setTemperatureCookie, removeTemperatureCookie] = useCookies(['temperatureFormat']);
+    const [periodCookie, setPeriodCookie, removePeriodCookie] = useCookies(['currentPeriod'])
 
-    const toogle = (button, className, fRef, sRef) => {
+    const toogle = (button, className, fRef, sRef, currPeriod) => {
         if(button.target.classList.contains(className))
             return 0;
         else {
@@ -21,25 +22,28 @@ export default function Header() {
             else
                 sRef.current.classList.remove(className);
         }
+
+        if(currPeriod)
+            setPeriodCookie('currentPeriod', currPeriod, { path: '/', maxAge: 3600 });
     }
 
     const toogleTemperatureFormat = (newFormat) => {
-        setCookies('temperatureFormat', newFormat, { path: '/', maxAge: 3600 });
+        setTemperatureCookie('temperatureFormat', newFormat, { path: '/', maxAge: 3600 });
     }
 
     return (
         <header>
             <div>
-                <button className="period" ref={todayPeriodRef} onClick={button => toogle(button, 'period-active', todayPeriodRef, weekPeriodRef)}> Today </button>
-                <button className="period period-active" ref={weekPeriodRef} onClick={button => toogle(button, 'period-active', todayPeriodRef, weekPeriodRef)}> Week </button>
+                <button className="period" ref={todayPeriodRef} onClick={button => toogle(button, 'period-active', todayPeriodRef, weekPeriodRef, 'today')}> Today </button>
+                <button className="period period-active" ref={weekPeriodRef} onClick={button => toogle(button, 'period-active', todayPeriodRef, weekPeriodRef, 'week')}> Week </button>
             </div>
             <div>
                 <button className="unit active-unit" ref={celsiusRef} onClick={button => {
-                    toogle(button, 'active-unit', celsiusRef, farenheitRef);
+                    toogle(button, 'active-unit', celsiusRef, farenheitRef, null);
                     toogleTemperatureFormat('celsius');
                     }}> °C </button>
                 <button className="unit" ref={farenheitRef} onClick={button => {
-                    toogle(button, 'active-unit', celsiusRef, farenheitRef);
+                    toogle(button, 'active-unit', celsiusRef, farenheitRef, null);
                     toogleTemperatureFormat('farenheit');
                 }}> °F </button>
             </div>
