@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useRef } from "react";
 import { useCookies } from "react-cookie";
 
 export default function Header() {
@@ -8,8 +8,8 @@ export default function Header() {
     const celsiusRef = useRef(0);
     const farenheitRef = useRef(0);
 
-    const [temperatureCookie, setTemperatureCookie, removeTemperatureCookie] = useCookies(['temperatureFormat']);
-    const [periodCookie, setPeriodCookie, removePeriodCookie] = useCookies(['currentPeriod'])
+    const [temperatureCookie, setTemperatureCookie] = useCookies(['temperatureFormat']);
+    const [periodCookie, setPeriodCookie] = useCookies(['currentPeriod'])
 
     const toogle = (button, className, fRef, sRef, currPeriod) => {
         if(button.target.classList.contains(className))

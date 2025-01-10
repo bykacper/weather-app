@@ -21,7 +21,7 @@ export default function TodayHighlights() {
 }
 
 function WindStatus() {
-    const { weather, setWeather } = useContext(WeatherContext); 
+    const { weather } = useContext(WeatherContext); 
 
     const getWindDirection = (degrees) => {
         if (degrees >= 0 && degrees <= 22.5) return "N";
@@ -48,7 +48,7 @@ function WindStatus() {
 }
 
 function SunriseAndSunset() {
-    const { weather, setWeather } = useContext(WeatherContext); 
+    const { weather } = useContext(WeatherContext); 
 
     return (
         <div className="th-card sunrise-and-sunset">
@@ -68,7 +68,7 @@ function SunriseAndSunset() {
 }
 
 function CloudyStatus() {
-    const { weather, setWeather } = useContext(WeatherContext); 
+    const { weather } = useContext(WeatherContext); 
 
     return (
         <div className="th-card">
@@ -79,7 +79,7 @@ function CloudyStatus() {
 }
 
 function Visibility() {
-    const { weather, setWeather } = useContext(WeatherContext); 
+    const { weather } = useContext(WeatherContext); 
 
     return (
         <div className="th-card">

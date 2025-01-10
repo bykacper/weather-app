@@ -60,6 +60,6 @@ export default function ForecastHighlights() {
         {currentPeriod == 'today' && weatherArray && weatherArray.map((weather) => (
             <ForecastHighlightsCard date={weather.datetime} icon={weather.icon} period={'today'} temp={weather.temp}/>
         ))}
-    </div>
+        </div>
     );
 }

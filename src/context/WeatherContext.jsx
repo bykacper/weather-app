@@ -21,6 +21,8 @@ export const WeatherProvider = ({ children }) => {
         );
     if(loading)
         return <h1> Loading... </h1>
+    if(error)
+        return <h1> Sorry, an error occurred.. </h1>
 };
 
 export default WeatherContext;
