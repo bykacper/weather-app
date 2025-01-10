@@ -44,7 +44,7 @@ export default function ForecastHighlights() {
                 i++;
             }
 
-            console.log(weatherBox);
+            setWeatherArray(weatherBox);
         }
     }, [weather, currentPeriod]);
 
@@ -57,7 +57,9 @@ export default function ForecastHighlights() {
         {currentPeriod == 'week' && weatherArray && weatherArray.map((weather) => (
             <ForecastHighlightsCard date={weather.datetime} icon={weather.icon} tempMin={weather.tempmin} tempMax={weather.tempmax}/>
         ))}
-        {currentPeriod == 'today' && <p> days </p>}
+        {currentPeriod == 'today' && weatherArray && weatherArray.map((weather) => (
+            <ForecastHighlightsCard date={weather.datetime} icon={weather.icon} period={'today'} temp={weather.temp}/>
+        ))}
     </div>
     );
 }

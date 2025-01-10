@@ -34,8 +34,8 @@ export default function Header() {
     return (
         <header>
             <div>
-                <button className="period" ref={todayPeriodRef} onClick={button => toogle(button, 'period-active', todayPeriodRef, weekPeriodRef, 'today')}> Today </button>
-                <button className="period period-active" ref={weekPeriodRef} onClick={button => toogle(button, 'period-active', todayPeriodRef, weekPeriodRef, 'week')}> Week </button>
+                <button className="period period-active" ref={todayPeriodRef} onClick={button => toogle(button, 'period-active', todayPeriodRef, weekPeriodRef, 'today')}> Today </button>
+                <button className="period" ref={weekPeriodRef} onClick={button => toogle(button, 'period-active', todayPeriodRef, weekPeriodRef, 'week')}> Week </button>
             </div>
             <div>
                 <button className="unit active-unit" ref={celsiusRef} onClick={button => {

@@ -9,7 +9,7 @@ export default function App() {
 
   useEffect(() => {
     setCookies('temperatureFormat', 'celsius', { path: '/', maxAge: 3600 });
-    setCookies('currentPeriod', 'week', { path: '/', maxAge: 3600 });
+    setCookies('currentPeriod', 'today', { path: '/', maxAge: 3600 });
 
   }, [])
 

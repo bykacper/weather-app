@@ -13,16 +13,17 @@ export default function ForecastHighlightsCard({date, icon, tempMin, tempMax, pe
 
     return (
         <div className="forecast-highligts-card">
-            {period == 'week' && <p> {getDayOfWeek(date)} </p>}
+            {period == 'week' ? <p> {getDayOfWeek(date)} </p>: <p> {date} </p>}
             <img src={`${icon}.png`} alt="" />
-            {temp && cookie.temperatureFormat === 'celsius' && <span> <strong> {farenheitToCelsius(tempMax)}°C </strong> / {farenheitToCelsius(tempMin)}°C </span>} 
-            {temp && cookie.temperatureFormat !== 'celsius' && <span> <strong> {tempMax}°F </strong> / {tempMin}°F </span>} 
-            {!temp && <span> <string> {temp} </string></span>}
+            {!temp && cookie.temperatureFormat === 'celsius' && <span> <strong> {farenheitToCelsius(tempMax)}°C </strong> / {farenheitToCelsius(tempMin)}°C </span>} 
+            {!temp && cookie.temperatureFormat !== 'celsius' && <span> <strong> {tempMax}°F </strong> / {tempMin}°F </span>} 
+            {temp && cookie.temperatureFormat === 'celsius' && <span> <strong> {farenheitToCelsius(temp)}°C </strong> </span>}
+            {temp && cookie.temperatureFormat !== 'celsius' && <span> <strong> {temp}°F </strong> </span>}
         </div>
     )
 }
 
 ForecastHighlightsCard.defaultProps = {
     period: "week",
-    temp: null
+    temp: false
 }
