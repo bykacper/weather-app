@@ -5,7 +5,8 @@ const WeatherContext = createContext();
 
 export const WeatherProvider = ({ children }) => {
     const [weather, setWeather] = useState(null);
-    const { data, loading, error } = useFetch('https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/Kielce?key=BWG8YRTJN7H62WBGBKDARL9HL');
+    const [key, setKey] = useState(import.meta.env.VITE_API_KEY);
+    const { data, loading, error } = useFetch(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/Kielce?key=${key}`);
 
     useEffect(() => {
         if(data)
