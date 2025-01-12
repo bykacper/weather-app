@@ -6,6 +6,7 @@ import { useCookies } from "react-cookie";
 export default function ForecastHighlights() {
     const [cookies, setCookie] = useCookies(['currentPeriod']);
     const [weatherArray, setWeatherArray] = useState([]);
+    const [currWidth, setCurrWidth] = useState(window.innerWidth);
     const [currentPeriod, setCurrentPeriod] = useState(cookies.currentPeriod || 'week');
     const { weather } = useContext(WeatherContext);
 
@@ -16,9 +17,23 @@ export default function ForecastHighlights() {
     }, [cookies, setCookie]);
 
     useEffect(() => {
+        const handleResize = () => {
+            setCurrWidth(window.innerWidth);
+        }
+
+        window.addEventListener('resize', handleResize);
+
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        }
+    }, [])
+
+    useEffect(() => {
+        const cardAmount = currWidth > 767 ? 7 : 4;
+
         if (currentPeriod == 'week' && weather && weather.days) {
             const weatherBox = [];
-            for (let i = 0; i < 7; i++) {
+            for (let i = 0; i < cardAmount; i++) {
                 if (weather.days[i + 1]) {
                     weatherBox.push(weather.days[i]);
                 }
@@ -29,10 +44,10 @@ export default function ForecastHighlights() {
             const weatherBox = [];
             let numberOfDay = 0;
             let numberOfHour = hour.getHours();
-            console.log(weather.days[numberOfDay].hours[23]);
             
             let i = 0;
-            while(i < 7) {
+
+            while(i < cardAmount) {
                 if(numberOfHour < 24) {
                     weatherBox.push(weather.days[numberOfDay].hours[numberOfHour]);
                     numberOfHour++;
@@ -46,7 +61,7 @@ export default function ForecastHighlights() {
 
             setWeatherArray(weatherBox);
         }
-    }, [weather, currentPeriod]);
+    }, [weather, currentPeriod, currWidth]);
 
     useEffect(() => {
         setCurrentPeriod(cookies.currentPeriod);

@@ -88,7 +88,7 @@ function Visibility() {
             {weather.currentConditions.visibility<=1 && (
                 <span> Very weak 😡 </span>
             )}
-            {weather.currentConditions.visibility>1 && weather.currentConditions.visibilit<=5 && (
+            {weather.currentConditions.visibility>1 && weather.currentConditions.visibility<=5 && (
                 <span> Weak 😬 </span>
             )}
             {weather.currentConditions.visibility>5 && weather.currentConditions.visibility<=10 && (

@@ -5,7 +5,7 @@ import TodayHighlights from "../components/TodayHighlights";
 
 export default function WeatherHighligts() {
     return (
-        <div className="weather-highligts">
+        <div className="weather-highlights">
             <Header />
             <ForecastHighlights />
             <TodayHighlights />
